@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  api:
+    build: .
+    working_dir: /app
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - '3005:3005'
+    volumes:
+      - .:/app
+      - api-server-node-modules-volume:/app/node_modules
+    # command: npm run start:dev
+    depends_on:
+      - db
+    stdin_open: true
+    networks:
+      - our_pockets_net
+
+  db:
+    image: mysql
+    platform: linux/x86_64
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    ports:
+      - 3306:3306
+    volumes:
+      - db-volume:/data/db
+    networks:
+      - our_pockets_net
+
+volumes:
+  db-volume:
+  api-server-node-modules-volume:
+
+networks:
+  our_pockets_net:
