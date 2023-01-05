@@ -1,4 +1,4 @@
-## OUR_POCKETS BACKEND
+## BACKEND
 
 ### 起動手順
 

@@ -17,7 +17,7 @@ services:
       - db
     stdin_open: true
     networks:
-      - our_pockets_net
+      - app_net
 
   db:
     image: mysql
@@ -33,11 +33,11 @@ services:
     volumes:
       - db-volume:/data/db
     networks:
-      - our_pockets_net
+      - app_net
 
 volumes:
   db-volume:
   api-server-node-modules-volume:
 
 networks:
-  our_pockets_net:
+  app_net:
