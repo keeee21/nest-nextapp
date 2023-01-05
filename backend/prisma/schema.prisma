@@ -9,3 +9,22 @@ datasource db {
   provider = "mysql"
   url      = "mysql://user:password@db:3306/db"
 }
+
+model User {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email String @unique
+  hashedPassword String
+  tasks Task[] //1対多の逆参照
+}
+
+model Task {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title String
+  description String?
+  userId Int
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
