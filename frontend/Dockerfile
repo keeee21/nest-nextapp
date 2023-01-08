@@ -1,11 +1,11 @@
-FROM node:lts-alpine AS build
+FROM --platform=linux/amd64 node:16 AS build
 
 # Create App dir
 RUN mkdir -p /app
 
 # RUN npm install
 
-FROM node:lts-alpine as app
+FROM --platform=linux/amd64 node:16 AS app
 
 # ## Copy built node modules and binaries without including the toolchain
 COPY --from=build /app .
