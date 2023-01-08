@@ -17,7 +17,7 @@ model User {
   email String @unique
   hashedPassword String
   nickName String?
-  tasks Task[] //1対多の逆参照
+  tasks Task[]
 }
 
 model Task {
